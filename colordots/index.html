@@ -15,6 +15,14 @@ function onFrame() {
   ball.fillColor = Color.random();
 }
 
+var text = new PointText({
+  point: view.center,
+  content: 'Midterm Exam!',
+  justification: 'center',
+  fontSize: 48,
+  className: "headline"
+});
+
 </script>
 <style>
 /* Scale canvas with resize attribute to full size */
