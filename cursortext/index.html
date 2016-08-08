@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.10.2/paper-full.min.js"></script>
+<script type="text/paperscript" canvas="myCanvas">
+
+
+tool.minDistance = 200;
+
+var messages = ['creative', 'design', 'ideas', 'graphics', 'web'];
+var currentIndex = 0;
+var color = "#ff0000";
+ 
+function onMouseMove(e) {
+currentIndex = (currentIndex + 1) % messages.length;
+var text = new PointText(e.point);
+text.justification = 'center';
+text.fillColor = color;
+text.scaling += Math.random() * 5;
+text.content = messages[currentIndex];;
+
+}
+ 
+
+</script>
+<style>
+/* Scale canvas with resize attribute to full size */
+canvas[resize] {
+    width: 100%;
+    height: 100%;
+}
+
+.hidden{
+	display:none;
+}
+</style>
+</head>
+<body>
+
+<canvas id="myCanvas" resize></canvas>
+<img src="comet.png" id="comet" class="hidden">
+</body>
+</html>
