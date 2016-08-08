@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.10.2/paper-full.min.js"></script>
+<script type="text/paperscript" canvas="myCanvas">
+
+
+var p = new Path();
+p.strokeColor = 'red';
+p.closed = true;
+p.strokeWidth = 5;
+
+
+//Create a random polygon
+for (var i = 0; i < 4; i++) {
+  var pointX = Math.random() * view.size.width;	
+  var pointY = Math.random() * view.size.height;
+  var s = p.add(pointX, pointY);
+
+  s.speedX = 2;
+  s.speedY = 2;
+}
+ 
+function onFrame() {
+  //Animate each point in the polygon
+  for (var i = 0; i < p.segments.length; i++) {
+    var s = p.segments[i];
+    s.point.x += s.speedX;
+    s.point.y += s.speedY;
+    
+    if (s.point.x < 0 || s.point.x > 500) {
+      s.speedX *= -1;
+    }
+  
+    if (s.point.y < 0 || s.point.y > 500) {
+      s.speedY *= -1;
+    }
+  }
+  p.strokeColor.hue += 1;
+}
+
+
+</script>
+<style>
+/* Scale canvas with resize attribute to full size */
+canvas[resize] {
+    width: 100%;
+    height: 100%;
+}
+
+.hidden{
+	display:none;
+}
+</style>
+</head>
+<body>
+
+<canvas id="myCanvas" resize></canvas>
+<img src="comet.png" id="comet" class="hidden">
+</body>
+</html>
